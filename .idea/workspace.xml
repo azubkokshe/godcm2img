@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="993de263-051c-4321-b074-cbb90895045a" name="Default Changelist" comment="" />
+    <list default="true" id="993de263-051c-4321-b074-cbb90895045a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/4.dcm" beforeDir="false" afterPath="$PROJECT_DIR$/4.dcm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2img.go" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2img.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2pnm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2pnm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/libdcm2pnm.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/godcm2img/wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/libdcm2pnm.so" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +26,10 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="$USER_HOME$/sdk/go1.15.4" />
+  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.15.6" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
   </component>
@@ -26,10 +41,12 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$USER_HOME$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmd" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -39,26 +56,32 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/cmd" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/godcm2img" />
+      <recent name="$PROJECT_DIR$/cmd" />
       <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/godcm2img" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="448" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1608808763852">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="448" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1440.813@0.25.1440.813" timestamp="1608808763852" />
-    <state x="229" y="67" key="SettingsEditor" timestamp="1608811147428">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="229" y="67" key="SettingsEditor/0.25.1440.813@0.25.1440.813" timestamp="1608811147428" />
   </component>
 </project>
