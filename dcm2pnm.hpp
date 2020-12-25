@@ -9,7 +9,7 @@ class DCM2PNM {
 public:
   DCM2PNM();
   ~DCM2PNM();
-  void* convert(int *outSize, const char *opt_ifname, unsigned int frameNumber, int outputFormat);
+  void* convert(int *outSize, char *fileData, int fileSize, unsigned int frameNumber, int outputFormat);
   char* getError();
 private:
   string errorString;

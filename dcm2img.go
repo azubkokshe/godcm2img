@@ -1,7 +1,9 @@
 package dcm2img
 
-//#cgo LDFLAGS: -L. -ldcm2pnm -Wl,-rpath=./ -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
+//#cgo LDFLAGS: -L. -ldcm2pnm -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
 //#include "wrapper.h"
+//#include <stdio.h>
+//#include <stdlib.h>
 import "C"
 import (
 	"errors"
@@ -22,10 +24,26 @@ func (p DCM2PNM) Free() {
 	C.Destroy(p.ptr)
 }
 
-func (p DCM2PNM) Convert(fileName string, frameNumber int, outputFormat int) ([]byte, error) {
+func (p DCM2PNM) GetJPEG(fileData *[]byte, frameNumber int) ([]byte, error) {
+	return p.convert(fileData, frameNumber, 1)
+}
+
+func (p DCM2PNM) GetPNG(fileData *[]byte, frameNumber int) ([]byte, error) {
+	return p.convert(fileData, frameNumber, 2)
+}
+
+func (p DCM2PNM) GetBMP(fileData *[]byte, frameNumber int) ([]byte, error) {
+	return p.convert(fileData, frameNumber, 3)
+}
+
+func (p DCM2PNM) convert(fileData *[]byte, frameNumber int, outputFormat int) ([]byte, error) {
 	dataLength := C.int(-1)
-	data := C.Convert(p.ptr, &dataLength, C.CString(fileName), C.uint(frameNumber), C.int(outputFormat))
-	if dataLength != -1 && data != nil {
+	cData := C.CBytes(*fileData)
+
+	data := C.Convert(p.ptr, &dataLength, (*C.char)(cData), C.int(len(*fileData)), C.uint(frameNumber), C.int(outputFormat))
+	defer C.free(unsafe.Pointer(data))
+	defer C.free(cData)
+	if dataLength > 0 && data != nil {
 		return C.GoBytes(data, dataLength), nil
 	} else {
 		return nil, errors.New(C.GoString(C.GetError(p.ptr)))

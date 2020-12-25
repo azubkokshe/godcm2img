@@ -13,14 +13,15 @@ DCM2PNM* AsDCM2PNM(void* p) {
 }
 
 void Destroy(void* p) {
-  AsDCM2PNM(p)->~DCM2PNM();
+    if (p != NULL)
+        free(AsDCM2PNM(p));
 }
 
 char* GetError(void* p) {
   return AsDCM2PNM(p)->getError();
 }
 
-void* Convert(void* p, int *outSize, const char *opt_ifname, unsigned int frameNumber, int outputFormat) {
-  return AsDCM2PNM(p)->convert(outSize, opt_ifname, frameNumber, outputFormat);
+void* Convert(void* p, int *outSize, char *fileData, int fileSize, unsigned int frameNumber, int outputFormat) {
+  return AsDCM2PNM(p)->convert(outSize, fileData, fileSize, frameNumber, outputFormat);
 }
 

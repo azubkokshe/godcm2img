@@ -28,6 +28,8 @@
 #include "dcmtk/ofstd/ofcmdln.h"         /* for OFCommandLine */
 #include "dcmtk/ofstd/ofstream.h"
 #include "dcmtk/oflog/oflog.h"
+#include "dcmtk/dcmdata/dcistrma.h"
+#include "dcmtk/dcmdata/dcistrmb.h"
 
 #define BUILD_DCM2PNM_AS_DCMJ2PNM
 
@@ -80,7 +82,7 @@ void DCM2PNM::warning(string str) {
 }
 
 
-void *DCM2PNM::convert(int *outSize, const char *opt_ifname, unsigned int opt_frame, int outputFormat) {
+void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int opt_frame, int outputFormat) {
     E_FileReadMode      opt_readMode = ERM_autoDetect;    /* default: fileformat or dataset */
     E_TransferSyntax    opt_transferSyntax = EXS_Unknown; /* default: xfer syntax recognition */
 
@@ -122,7 +124,7 @@ void *DCM2PNM::convert(int *outSize, const char *opt_ifname, unsigned int opt_fr
     DiPNGMetainfo       opt_metainfo  = E_pngFileMetainfo;
 
     // JPEG parameters
-    OFCmdUnsignedInt    opt_quality = 100;                 /* default: 90% JPEG quality */
+    OFCmdUnsignedInt    opt_quality = 80;                 /* default: 90% JPEG quality */
     E_SubSampling       opt_sampling = ESS_422;           /* default: 4:2:2 sub-sampling */
     E_DecompressionColorSpaceConversion opt_decompCSconversion = EDC_photometricInterpretation;
 
@@ -141,16 +143,20 @@ void *DCM2PNM::convert(int *outSize, const char *opt_ifname, unsigned int opt_fr
 
     FILE *stream;
     char *bResult = nullptr;
-    size_t dataLength;
+    size_t dataLength = 0;
 
     DcmRLEDecoderRegistration::registerCodecs();
     DJDecoderRegistration::registerCodecs(opt_decompCSconversion);
 
+    DcmInputBufferStream inputStream;
+    inputStream.setBuffer(fileData, fileSize);
+    inputStream.setEos();
+
     DcmFileFormat *dfile = new DcmFileFormat();
-    OFCondition cond = dfile->loadFile(opt_ifname, opt_transferSyntax, EGL_withoutGL, DCM_MaxReadLength, opt_readMode);
+    OFCondition cond = dfile->read(inputStream, opt_transferSyntax, EGL_withoutGL, DCM_MaxReadLength);
 
     if (cond.bad()) {
-        error("File read error");
+        error("Stream read error");
         return nullptr;
     }
 

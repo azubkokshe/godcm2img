@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="993de263-051c-4321-b074-cbb90895045a" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/4.dcm" beforeDir="false" afterPath="$PROJECT_DIR$/4.dcm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2img.go" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2img.go" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2pnm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/dcm2pnm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/libdcm2pnm.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/godcm2img/wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libdcm2pnm.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dcm2img.go" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2img.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dcm2pnm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dcm2pnm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.hpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.h" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +41,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" url="file://$USER_HOME$/sdk/go1.15.6" />
+  <component name="GOROOT" path="$USER_HOME$/sdk/go1.15.4" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -34,14 +49,17 @@
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1m6JVT8hzE1en1QBwUf6vZkquu6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
@@ -83,5 +101,15 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="520" y="365" key="#GOROOT" timestamp="1608901584738">
+      <screen x="0" y="25" width="1440" height="813" />
+    </state>
+    <state x="520" y="365" key="#GOROOT/0.25.1440.813@0.25.1440.813" timestamp="1608901584738" />
+    <state x="385" y="162" width="670" height="676" key="search.everywhere.popup" timestamp="1608904510507">
+      <screen x="0" y="25" width="1440" height="813" />
+    </state>
+    <state x="385" y="162" width="670" height="676" key="search.everywhere.popup/0.25.1440.813@0.25.1440.813" timestamp="1608904510507" />
   </component>
 </project>
