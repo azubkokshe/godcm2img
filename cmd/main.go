@@ -21,11 +21,11 @@ func conv(path string, name string, count int64) {
 		panic(err)
 	}
 	log.Println("read file size", len(fileData), path)
-	res, err := foo.GetJPEG(&fileData, 1)
+	res, err := foo.GetBMP(&fileData, 0)
 	if err != nil {
 		panic(err)
 	} else {
-		ioutil.WriteFile("./result/"+strconv.FormatInt(int64(count), 10)+".jpeg", res, 0666)
+		ioutil.WriteFile("./result/"+strconv.FormatInt(int64(count), 10)+".bmp", res, 0666)
 	}
 }
 

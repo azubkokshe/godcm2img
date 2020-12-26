@@ -86,8 +86,6 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     E_FileReadMode      opt_readMode = ERM_autoDetect;    /* default: fileformat or dataset */
     E_TransferSyntax    opt_transferSyntax = EXS_Unknown; /* default: xfer syntax recognition */
 
-    opt_frame = 1;
-
     unsigned long       opt_compatibilityMode = CIF_MayDetachPixelData | CIF_TakeOverExternalDataset;
     OFBool              opt_ignoreVoiLutDepth = OFFalse;  /* default: do not ignore VOI LUT bit depth */
                                                           /* default: pixel data may detached if no longer needed */
@@ -136,7 +134,7 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     } else if (outputFormat == 2) {
         opt_fileType = EFT_PNG;
     } else if (outputFormat == 3) {
-        opt_fileType = EFT_32bitBMP;
+        opt_fileType = EFT_8bitPNM;
     }
                                                           /* (binary for file output and ASCII for stdout) */
     OFCmdUnsignedInt    opt_fileBits = 0;                 /* default: 0 */
