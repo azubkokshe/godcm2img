@@ -1,7 +1,6 @@
 #pragma once
 
 #include <iostream>
-#include "dcmtk/dcmdata/dctk.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 package dcm2img
 
-//#cgo LDFLAGS: -L. -ldcm2pnm -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
+//#cgo LDFLAGS: -L./ -ldcm2pnm -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
 //#include "wrapper.h"
 //#include <stdio.h>
 //#include <stdlib.h>

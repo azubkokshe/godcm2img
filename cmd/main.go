@@ -21,11 +21,11 @@ func conv(path string, name string, count int64) {
 		panic(err)
 	}
 	log.Println("read file size", len(fileData), path)
-	res, err := foo.GetBMP(&fileData, 0)
+	res, err := foo.GetPNG(&fileData, 1)
 	if err != nil {
 		panic(err)
 	} else {
-		ioutil.WriteFile("./result/"+strconv.FormatInt(int64(count), 10)+".bmp", res, 0666)
+		ioutil.WriteFile("./result/"+strconv.FormatInt(int64(count), 10)+".png", res, 0666)
 	}
 }
 
@@ -54,7 +54,7 @@ func main() {
 		time.Sleep(5 * time.Millisecond)
 	}
 	fmt.Println("Elapsed:", time.Since(t1))
-	time.Sleep(100 * time.Second)
+	//time.Sleep(100 * time.Second)
 	fmt.Println("AllSize:", allSize)
 	fmt.Println("all count", count)
 }

@@ -3,9 +3,11 @@
 #define BUILD_DCM2PNM_AS_DCMJ2PNM
 #define INCLUDE_CSTDIO
 #define INCLUDE_CSTRING
-#define OFFIS_CONSOLE_APPLICATION "dcmj2pnm"
 #define SHORTCOL 4
 #define LONGCOL 20
+
+#define BUILD_DCM2PNM_AS_DCMJ2PNM
+#define WITH_LIBPNG
 
 #include <iostream>
 #include <string>
@@ -30,12 +32,8 @@
 #include "dcmtk/oflog/oflog.h"
 #include "dcmtk/dcmdata/dcistrma.h"
 #include "dcmtk/dcmdata/dcistrmb.h"
-
-#define BUILD_DCM2PNM_AS_DCMJ2PNM
-
 #include "dcmtk/dcmjpls/djdecode.h"
 #include "dcmtk/dcmimage/dipitiff.h"
-
 #include "dcmtk/dcmjpeg/djdecode.h"      /* for dcmjpeg decoders */
 #include "dcmtk/dcmjpeg/dipijpeg.h"      /* for dcmimage JPEG plugin */
 
@@ -67,6 +65,8 @@ DCM2PNM::~DCM2PNM() {
 /*
 MONOCHROME2 MONOCHROME1 PALETTE COLOR RGB YBR_FULL YBR_FULL_422 YBR_PARTIAL_422 YBR_RCT YBR_ICT
 http://dicom.nema.org/medical/dicom/2019a/output/chtml/part05/sect_8.2.html
+
+About open_memstream https://iotone.ir/shop/public/upload/article/5b9f487cb4536.pdf
 */
 
 char *DCM2PNM::getError() {
@@ -80,7 +80,6 @@ void DCM2PNM::error(string str) {
 void DCM2PNM::warning(string str) {
     std::cout << str << std::endl;
 }
-
 
 void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int opt_frame, int outputFormat) {
     E_FileReadMode      opt_readMode = ERM_autoDetect;    /* default: fileformat or dataset */
@@ -134,12 +133,12 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     } else if (outputFormat == 2) {
         opt_fileType = EFT_PNG;
     } else if (outputFormat == 3) {
-        opt_fileType = EFT_8bitPNM;
+        opt_fileType = EFT_8bitBMP;
     }
                                                           /* (binary for file output and ASCII for stdout) */
     OFCmdUnsignedInt    opt_fileBits = 0;                 /* default: 0 */
 
-    FILE *stream;
+    FILE *stream = nullptr;
     char *bResult = nullptr;
     size_t dataLength = 0;
 
@@ -353,7 +352,7 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
             }
         }
 
-        /* write selected frame(s) to file */
+        /* write selected frame to mem buffer */
         int result = 0;
         stream = open_memstream(&bResult, &dataLength);
 
@@ -369,27 +368,35 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
             {
                 case EFT_RawPNM:
                     result = di->writeRawPPM(stream, 8, frame);
+                    fclose(stream);
                     break;
                 case EFT_8bitPNM:
                     result = di->writePPM(stream, 8, frame);
+                    fclose(stream);
                     break;
                 case EFT_16bitPNM:
                     result = di->writePPM(stream, 16, frame);
+                    fclose(stream);
                     break;
                 case EFT_NbitPNM:
                     result = di->writePPM(stream, OFstatic_cast(int, opt_fileBits), frame);
+                    fclose(stream);
                     break;
                 case EFT_BMP:
                     result = di->writeBMP(stream, 0, frame);
+                    fclose(stream);
                     break;
                 case EFT_8bitBMP:
                     result = di->writeBMP(stream, 8, frame);
+                    fclose(stream);
                     break;
                 case EFT_24bitBMP:
                     result = di->writeBMP(stream, 24, frame);
+                    fclose(stream);
                     break;
                 case EFT_32bitBMP:
                     result = di->writeBMP(stream, 32, frame);
+                    fclose(stream);
                     break;
                 case EFT_JPEG:{
                         DiJPEGPlugin plugin;
@@ -403,15 +410,17 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
                         pngPlugin.setInterlaceType(opt_interlace);
                         pngPlugin.setMetainfoType(opt_metainfo);
                         result = di->writePluginFormat(&pngPlugin, stream, frame);
+                        fclose(stream);
                     }
                     break;
                 default:
                       result = di->writePPM(stream, 8, frame);
+                      fclose(stream);
                     break;
             }
 
             if (!result) {
-                error("cannot write frame");
+                error("Cannot write frame");
                 return nullptr;
             }
         }
