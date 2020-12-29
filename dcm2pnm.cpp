@@ -81,7 +81,9 @@ void DCM2PNM::warning(string str) {
     std::cout << str << std::endl;
 }
 
-void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int opt_frame, int outputFormat) {
+void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int opt_frame, int outputFormat,
+                        unsigned int opt_quality, int opt_useClip, int opt_left, int opt_top, unsigned int opt_width,
+                        unsigned int opt_height, int opt_scaleType, unsigned int opt_scale_width, unsigned int opt_scale_height) {
     E_FileReadMode      opt_readMode = ERM_autoDetect;    /* default: fileformat or dataset */
     E_TransferSyntax    opt_transferSyntax = EXS_Unknown; /* default: xfer syntax recognition */
 
@@ -94,15 +96,18 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     int                 opt_changePolarity = 0;           /* default: normal polarity */
     int                 opt_useAspectRatio = 1;           /* default: use aspect ratio for scaling */
     OFCmdUnsignedInt    opt_useInterpolation = 1;         /* default: use interpolation method '1' for scaling */
-    int                 opt_useClip = 0;                  /* default: don't clip */
-    OFCmdSignedInt      opt_left = 0, opt_top = 0;        /* clip region (origin) */
-    OFCmdUnsignedInt    opt_width = 0, opt_height = 0;    /* clip region (extension) */
+    //int                 opt_useClip = 0;                  /* default: don't clip */
+    //OFCmdSignedInt      opt_left = 0, opt_top = 0;        /* clip region (origin) */
+    //OFCmdUnsignedInt    opt_width = 0, opt_height = 0;    /* clip region (extension) */
     int                 opt_rotateDegree = 0;             /* default: no rotation */
     int                 opt_flipType = 0;                 /* default: no flipping */
-    int                 opt_scaleType = 0;                /* default: no scaling */
+    //int                 opt_scaleType = 0;                /* default: no scaling */
                         /* 1 = X-factor, 2 = Y-factor, 3=X-size, 4=Y-size */
     OFCmdFloat          opt_scale_factor = 1.0;
     OFCmdUnsignedInt    opt_scale_size = 1;
+
+    //OFCmdUnsignedInt    opt_scale_width = 0;
+    //OFCmdUnsignedInt    opt_scale_height = 0;
 
     //1 - задать вручную, то нужно указать параметр opt_windowParameter
     //3 - автоматическое определение - это в крайнем случае, если не получится выдрать первый параметр из метаданных
@@ -121,7 +126,7 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     DiPNGMetainfo       opt_metainfo  = E_pngFileMetainfo;
 
     // JPEG parameters
-    OFCmdUnsignedInt    opt_quality = 80;                 /* default: 90% JPEG quality */
+    //OFCmdUnsignedInt    opt_quality = 80;                 /* default: 90% JPEG quality */
     E_SubSampling       opt_sampling = ESS_422;           /* default: 4:2:2 sub-sampling */
     E_DecompressionColorSpaceConversion opt_decompCSconversion = EDC_photometricInterpretation;
 
@@ -163,6 +168,10 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
     Sint32 frameCount;
     if (dataset->findAndGetSint32(DCM_NumberOfFrames, frameCount).bad()) frameCount = 1;
 
+    //std::cout << "frame count is: " << frameCount << std::endl;
+    //std::cout << "opt_frame is: " << opt_frame << std::endl;
+    //std::cout << "opt_frameCount is: " << opt_frameCount << std::endl;
+
     if ((opt_frameCount == 0) || ((opt_frame == 1) && (opt_frameCount == OFstatic_cast(Uint32, frameCount)))) {
         // since we process all frames anyway, decompress the complete pixel data (if required)
         opt_compatibilityMode |= CIF_DecompressCompletePixelData;
@@ -170,7 +179,7 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
 
     if (frameCount > 1) {
         // use partial read access to pixel data (only in case of multiple frames)
-        opt_compatibilityMode |= CIF_UsePartialAccessToPixelData;
+       opt_compatibilityMode |= CIF_UsePartialAccessToPixelData;
     }
 
     DicomImage *di = new DicomImage(dfile, xfer, opt_compatibilityMode, opt_frame - 1, opt_frameCount);
@@ -179,10 +188,14 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
         return nullptr;
     }
 
+    //std::cout << "frame count after is: " << opt_frameCount << std::endl;
+
     if (di->getStatus() != EIS_Normal) {
         error(DicomImage::getString(di->getStatus()));
         return nullptr;
     }
+
+    //std::cout << "status: " << DicomImage::getString(di->getStatus()) << std::endl;
 
     if (!opt_suppressOutput) {
         /* try to select frame */
@@ -206,7 +219,7 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
              }
         }
 
-         di->hideAllOverlays();
+         //di->hideAllOverlays();
 
         /* process VOI parameters */
         switch (opt_windowType) {
@@ -300,7 +313,6 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
             }
         }
 
-        /* perform scaling */
         if (opt_scaleType > 0) {
             DicomImage *newimage;
             switch (opt_scaleType) {
@@ -336,10 +348,21 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
                         newimage = di->createScaledImage(0, opt_scale_size, OFstatic_cast(int, opt_useInterpolation),
                             opt_useAspectRatio);
                     break;
+                case 5:{
+                    if (opt_useClip) {
+                    newimage = di->createScaledImage(opt_left, opt_top, opt_width, opt_height, static_cast<unsigned long>(opt_scale_width), static_cast<unsigned long>(opt_scale_height),
+                                                OFstatic_cast(int, 0), opt_useAspectRatio);
+                    } else {
+                        newimage = di->createScaledImage(static_cast<unsigned long>(opt_scale_width), static_cast<unsigned long>(opt_scale_height),
+                                        OFstatic_cast(int, opt_useInterpolation), opt_useAspectRatio);
+                    }
+                }
+                break;
                 default:
                     newimage = NULL;
                     break;
             }
+
             if (newimage == NULL) {
                 error("Out of memory or cannot scale image");
                 return nullptr;
@@ -363,58 +386,62 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
 
         unsigned int frame = opt_frame - 1;
 
+        unsigned int fcount = OFstatic_cast(unsigned int, ((opt_frameCount > 0) && (opt_frameCount <= di->getFrameCount())) ? opt_frameCount : di->getFrameCount());
+
+        //std::cout << "fcount: " << fcount << " di frameCount: " << di->getFrameCount() << std::endl;
+
         {
             switch (opt_fileType)
             {
                 case EFT_RawPNM:
-                    result = di->writeRawPPM(stream, 8, frame);
+                    result = di->writeRawPPM(stream, 8, 0);
                     fclose(stream);
                     break;
                 case EFT_8bitPNM:
-                    result = di->writePPM(stream, 8, frame);
+                    result = di->writePPM(stream, 8, 0);
                     fclose(stream);
                     break;
                 case EFT_16bitPNM:
-                    result = di->writePPM(stream, 16, frame);
+                    result = di->writePPM(stream, 16, 0);
                     fclose(stream);
                     break;
                 case EFT_NbitPNM:
-                    result = di->writePPM(stream, OFstatic_cast(int, opt_fileBits), frame);
+                    result = di->writePPM(stream, OFstatic_cast(int, opt_fileBits), 0);
                     fclose(stream);
                     break;
                 case EFT_BMP:
-                    result = di->writeBMP(stream, 0, frame);
+                    result = di->writeBMP(stream, 0, 0);
                     fclose(stream);
                     break;
                 case EFT_8bitBMP:
-                    result = di->writeBMP(stream, 8, frame);
+                    result = di->writeBMP(stream, 8, 0);
                     fclose(stream);
                     break;
                 case EFT_24bitBMP:
-                    result = di->writeBMP(stream, 24, frame);
+                    result = di->writeBMP(stream, 24, 0);
                     fclose(stream);
                     break;
                 case EFT_32bitBMP:
-                    result = di->writeBMP(stream, 32, frame);
+                    result = di->writeBMP(stream, 32, 0);
                     fclose(stream);
                     break;
                 case EFT_JPEG:{
                         DiJPEGPlugin plugin;
                         plugin.setQuality(OFstatic_cast(unsigned int, opt_quality));
                         plugin.setSampling(opt_sampling);
-                        result = di->writePluginFormat(&plugin, stream, frame);
+                        result = di->writePluginFormat(&plugin, stream, 0);
                     }
                     break;
                 case EFT_PNG: {
                         DiPNGPlugin pngPlugin;
                         pngPlugin.setInterlaceType(opt_interlace);
                         pngPlugin.setMetainfoType(opt_metainfo);
-                        result = di->writePluginFormat(&pngPlugin, stream, frame);
+                        result = di->writePluginFormat(&pngPlugin, stream, 0);
                         fclose(stream);
                     }
                     break;
                 default:
-                      result = di->writePPM(stream, 8, frame);
+                      result = di->writePPM(stream, 8, 0);
                       fclose(stream);
                     break;
             }
