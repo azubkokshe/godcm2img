@@ -1,6 +1,7 @@
 package dcm2img
 
-//#cgo LDFLAGS: -L./ -ldcm2pnm -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
+//#cgo linux LDFLAGS: -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage -lpng -lijg12 -lijg16 -lijg8
+//#cgo darwin LDFLAGS:  -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage -lpng -lijg12 -lijg16 -lijg8
 //#include "wrapper.h"
 //#include <stdio.h>
 //#include <stdlib.h>
@@ -9,6 +10,9 @@ import (
 	"errors"
 	"unsafe"
 )
+
+//#cgo LDFLAGS: -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
+//#cgo LDFLAGS: -L/usr/lib -liconv -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage -lpng -lijg12 -lijg16 -lijg8
 
 type DCM2PNM struct {
 	ptr unsafe.Pointer
