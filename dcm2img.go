@@ -11,9 +11,6 @@ import (
 	"unsafe"
 )
 
-//#cgo LDFLAGS: -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage
-//#cgo LDFLAGS: -L/usr/lib -liconv -pthread -ldcmdata -lz -loflog -lofstd -ldcmjpeg -ldcmimgle -ldcmimage -lpng -lijg12 -lijg16 -lijg8
-
 type DCM2PNM struct {
 	ptr unsafe.Pointer
 }

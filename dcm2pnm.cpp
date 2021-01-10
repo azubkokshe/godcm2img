@@ -388,8 +388,6 @@ void *DCM2PNM::convert(int *outSize, char *fileData, int fileSize, unsigned int 
 
         unsigned int fcount = OFstatic_cast(unsigned int, ((opt_frameCount > 0) && (opt_frameCount <= di->getFrameCount())) ? opt_frameCount : di->getFrameCount());
 
-        //std::cout << "fcount: " << fcount << " di frameCount: " << di->getFrameCount() << std::endl;
-
         {
             switch (opt_fileType)
             {

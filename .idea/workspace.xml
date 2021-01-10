@@ -20,19 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="993de263-051c-4321-b074-cbb90895045a" name="Default Changelist" comment="- add lib for darwin_amd64 &amp;&amp; linux_amd64">
-      <change afterPath="$PROJECT_DIR$/dcmtk/dcmsr/libsrc/CMakeFiles/dcmsr.dir/depend.internal" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dcmtk/dcmsr/libsrc/CMakeFiles/dcmsr.dir/depend.make" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/result/0.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmd/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/cmd/main.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dcm2img.go" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2img.go" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/dcm2pnm.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dcm2pnm.hpp" beforeDir="false" afterPath="$PROJECT_DIR$/dcm2pnm.hpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/dcmtk" beforeDir="false" afterPath="$PROJECT_DIR$/dcmtk" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/libdcm2pnm_darwin_amd64.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/libdcm2pnm_linux_amd64.so" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.cpp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/wrapper.h" beforeDir="false" afterPath="$PROJECT_DIR$/wrapper.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dcmtk" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +39,7 @@
       </list>
     </option>
   </component>
-  <component name="GOROOT" path="$USER_HOME$/sdk/go1.15.4" />
+  <component name="GOROOT" url="file://$PROJECT_DIR$/../../../Go" />
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -72,14 +65,14 @@
     <property name="go.import.settings.migrated" value="true" />
     <property name="go.sdk.automatically.set" value="true" />
     <property name="go.tried.to.enable.integration.vgo.integrator" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/cmd" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -110,6 +103,9 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/dcmtk" />
+    </ignored-roots>
     <MESSAGE value="Изменил интерфейс модуля: входным и выходными данными является теперь []byte" />
     <MESSAGE value="- add submodule: dcmtk&#10;- add methods: GetJPEG, GetPNG, GetBMP" />
     <MESSAGE value="- recovery png &amp; bmp conversion" />
@@ -119,27 +115,5 @@
   </component>
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="520" y="365" key="#GOROOT" timestamp="1608901584738">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="520" y="365" key="#GOROOT/0.25.1440.813@0.25.1440.813" timestamp="1608901584738" />
-    <state x="384" y="237" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1609231191582">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="384" y="237" key="#com.intellij.fileTypes.FileTypeChooser/0.25.1440.813@0.25.1440.813" timestamp="1609231191582" />
-    <state x="320" y="168" key="Vcs.Push.Dialog.v2" timestamp="1609232961127">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="320" y="168" key="Vcs.Push.Dialog.v2/0.25.1440.813@0.25.1440.813" timestamp="1609232961127" />
-    <state x="467" y="169" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1609231191653">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="467" y="169" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.25.1440.813@0.25.1440.813" timestamp="1609231191653" />
-    <state x="385" y="162" width="670" height="676" key="search.everywhere.popup" timestamp="1608904510507">
-      <screen x="0" y="25" width="1440" height="813" />
-    </state>
-    <state x="385" y="162" width="670" height="676" key="search.everywhere.popup/0.25.1440.813@0.25.1440.813" timestamp="1608904510507" />
   </component>
 </project>
